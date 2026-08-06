@@ -3,316 +3,320 @@
 <head>
 <meta charset="UTF-8">
 <title>MLB KOR</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-
-header {
-  background: rgb(255, 255, 255);
-  color: #000000;
-  padding: 15px 25px;
-  font-size: 28px;
-  font-weight: bold;
+/* 🎨 전체적인 디자인 스타일 및 심플화 */
+body {
+margin: 0;
+background: #141414;
+color: #ffffff;
+font-family: 'Segoe UI', Arial, sans-serif;
+-webkit-font-smoothing: antialiased;
 }
 
-.top-header {
-  background: black;
-  color: #e50914;
-  padding: 15px 25px;
-  font-size: 28px;
-  font-weight: bold;
+header.top-header {
+background: #000000;
+color: #e50914;
+padding: 15px 30px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid #222;
+position: sticky;
+top: 0;
+z-index: 1000;
+}
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.logo {
+font-family: 'Oswald', sans-serif;
+font-weight: 700;
+font-size: 24px;
+letter-spacing: 1.5px;
+color: #ffffff;
+cursor: pointer;
+transition: opacity 0.2s;
+}
+
+.logo:hover {
+opacity: 0.8;
+}
+
+.header-icons {
+display: flex;
+gap: 12px;
+align-items: center;
 }
 
 .header-icon {
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  transition: 0.2s;
+width: 28px;
+height: 28px;
+border-radius: 50%;
+cursor: pointer;
+transition: transform 0.2s;
 }
 
 .header-icon:hover {
-  transform: scale(1.2);
+transform: scale(1.15);
+}
+
+.search-container {
+padding: 20px 30px 10px 30px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+#searchInput {
+width: 100%;
+padding: 14px 20px;
+font-size: 16px;
+background: #222;
+border: 1px solid #333;
+border-radius: 8px;
+color: white;
+outline: none;
+transition: border-color 0.2s;
+box-sizing: border-box;
+}
+
+#searchInput:focus {
+border-color: #e50914;
 }
 
 .container {
-  padding: 20px;
+max-width: 1200px;
+margin: 0 auto;
+padding: 20px 30px;
 }
 
-.content-item {
-  width: 220px;
-  cursor: pointer;
-}
-
-.content-item img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.episodes {
-  margin-top: 30px;
-}
-
-.episode {
-  padding: 10px;
-  background: #222;
-  margin-bottom: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.episode:hover {
-  background: #444;
-}
-
-iframe {
-  width: 80%;
-  max-width: 900px;
-  height: 500px;
-  border: none;
-  border-radius: 10px;
+.section-title {
+font-size: 18px;
+font-weight: bold;
+margin: 30px 0 15px 0;
+border-left: 4px solid #e50914;
+padding-left: 10px;
+color: #fff;
 }
 
 .content-list {
-  display: flex;
-  flex-wrap: wrap;
+display: flex;
+gap: 15px;
+overflow-x: auto;
+padding-bottom: 15px;
+scrollbar-width: none;
+
+/* 🖱️ 컴퓨터 마우스 드래그를 위한 추가 설정 */
+  user-select: none; 
+  cursor: grab;
 }
 
-@media (max-width: 768px) {
-  .content-item {
-    width: 32%;
-  }
-}
-
-@media (max-width: 768px) {
-  .header-icon {
-  width: 26px !important;
-  height: 26px !important;
-}
-
-  .top-header {
-  padding: 8px 10px !important;
-  font-size: 18px !important;
-}
-
-.logo {
-  font-size: 18px !important;
-}
-}
-
-.content-item {
-  width: 220px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.content-item img {
-  width: 100%;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-}
-
-/* 🔥 핵심 */
-.content-item:hover {
-  transform: scale(1.08);
-  z-index: 5;
-}
-
-.content-item:hover img {
-  transform: scale(1.1);
-}
-
-.content-item p {
-  margin-top: 8px;
-  font-size: 14px;
-  color: #ddd;
-}
-
-.section h2 {
-  border-left: 4px solid #e50914;
-  padding-left: 10px;
-}
-
-body {
-  margin: 0;
-  background: linear-gradient(to bottom, #292929, #a5a5a5);
-  color: white;
-  font-family: Arial, sans-serif;
-}
-
-.player {
-  margin-top: 30px;
-  text-align: center;
-}
-
-iframe {
-  width: 90%;
-  max-width: 1000px;
-  height: 520px;
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.7);
-}
-
-.episode {
-  padding: 12px;
-  background: #000000;
-  margin-bottom: 10px;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.episode:hover {
-  background: #333;
-  transform: translateX(5px);
-}
-
-.content-list {
-  display: flex;
-  gap: 15px;
-  overflow-x: auto;
-  padding-bottom: 10px;
+.content-list:active {
+  cursor: grabbing;
 }
 
 .content-list::-webkit-scrollbar {
-  display: none;
+display: none;
 }
 
-.logo {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 700;
-  font-size: 26px;
-  letter-spacing: 2px;
-  color: #ffffff;
+.content-item {
+flex: 0 0 210px; /* 가로 비율 카드로 크기 조정 */
+cursor: pointer;
+transition: transform 0.25s ease;
 }
 
-/* 📱 모바일 전용 */
-@media (max-width: 768px) {
-
-  /* 🔥 헤더 줄이기 */
-  .top-header {
-    padding: 8px 12px;
-  }
-
-  .logo {
-    font-size: 18px;
-  }
-
-  .header-links img {
-    width: 28px;
-    height: 28px;
-  }
-
-  /* 🔥 콘텐츠 카드 (2~3개씩 보이게) */
-  .content-list {
-    gap: 10px;
-  }
-
-  .content-item {
-    width: 45%;
-  }
-
-  .content-item img {
-    border-radius: 8px;
-  }
-
-  /* 🔥 제목 크기 줄이기 */
-  h2 {
-    font-size: 16px;
-    margin-left: 5px;
-  }
-
-  /* 🔥 검색창 */
-  #searchInput {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  /* 🔥 플레이어 (핵심) */
-  iframe {
-    width: 100%;
-    height: 220px;
-  }
-
-  /* 🔥 에피소드 */
-  .episode {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  @media (max-width: 768px) {
-  .top-header {
-    padding: 20px 15px;
-  }
+.content-item img {
+width: 100%;
+aspect-ratio: 4 / 3; /* 요청하신 4:3 가로 비율 적용 */
+object-fit: cover;
+border-radius: 8px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.content-item:hover {
+transform: translateY(-5px);
+}
+
+.content-item:hover img {
+box-shadow: 0 8px 20px rgba(229, 9, 20, 0.3);
 }
 
 .content-item p {
-  font-size: 12px;
+margin-top: 8px;
+font-size: 13px;
+color: #ccc;
+line-height: 1.4;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
 }
 
+/* 🎬 플레이어 영역 */
+.player {
+max-width: 1200px;
+margin: 20px auto;
+padding: 0 30px;
+text-align: center;
+}
+
+iframe {
+width: 100%;
+max-width: 900px;
+height: 500px;
+border: none;
+border-radius: 12px;
+box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+background: #000;
+}
+
+/* 📺 에피소드 목록 */
+.episodes {
+max-width: 1200px;
+margin: 20px auto;
+padding: 0 30px;
+}
+
+.episodes h3 {
+font-size: 20px;
+margin-bottom: 15px;
+color: #fff;
+}
+
+.episode {
+padding: 14px 18px;
+background: #1a1a1a;
+margin-bottom: 8px;
+cursor: pointer;
+border-radius: 6px;
+font-size: 14px;
+transition: background 0.2s, transform 0.2s;
+border: 1px solid #262626;
+}
+
+.episode:hover {
+background: #2a2a2a;
+transform: translateX(4px);
+border-color: #444;
+}
+
+/* 📱 모바일 최적화 */
 @media (max-width: 768px) {
-  .header-links img {
-    width: 60px !important;
-    height: 60px !important;
-  }
+header.top-header {
+padding: 12px 15px;
 }
 
-/* 🔥 위쪽 빈공간 제거 */
-body {
-  margin: 0;
+.logo {
+font-size: 18px;
 }
 
-.container {
-  padding-top: 0 !important;
+.search-container, .container, .player, .episodes {
+padding-left: 15px;
+padding-right: 15px;
 }
 
-h2 {
-  margin-top: 0 !important;
+.content-item {
+flex: 0 0 160px;
 }
 
-header {
-  margin-bottom: 0 !important;
+iframe {
+height: 240px;
 }
+}
+
+/* 📜 각 섹션별 가로 스크롤바(드래그 바) 스타일 */
+.content-list {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 5px 4px 20px 4px;
+  
+  /* 🖱️ 컴퓨터 드래그 설정 */
+  user-select: none;
+  cursor: grab;
+
+  /* 파이어폭스 스크롤바 스타일 */
+  scrollbar-width: thin;
+  scrollbar-color: #e50914 #222;
+}
+
+.content-list:active {
+  cursor: grabbing;
+}
+
+/* 크롬, 사파리, 엣지 스크롤바(드래그 바) 디자인 */
+.content-list::-webkit-scrollbar {
+  height: 8px; /* 드래그 바 두께 */
+}
+
+.content-list::-webkit-scrollbar-thumb {
+  background: #e50914; /* 눈에 띄는 포인트 레드 색상 */
+  border-radius: 4px;
+}
+
+.content-list::-webkit-scrollbar-track {
+  background: #222; /* 드래그 바 배경 트랙 */
+  border-radius: 4px;
+}
+
+// 🖱️ 모든 작품 메뉴(content-list)에 컴퓨터 마우스 드래그 가로 스크롤 기능 부여
+const sliders = document.querySelectorAll('.content-list');
+sliders.forEach(slider => {
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+  });
+
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+  });
+
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.5; // 드래그 민감도
+    slider.scrollLeft = scrollLeft - walk;
+  });
+});
 
 </style>
 </head>
-
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-
 <body>
 
 <header class="top-header">
-  <span class="logo">🐞 MIRACULOUS CENEMA KOREAN 🐞</span>
-
-<div>
-  <a href="https://youtube.com/channel/UCBqVwXZmvm44NyNqYlrheUQ?si=Rv13RYxcDmp2owg2"><img src="https://yt3.googleusercontent.com/cn1f2mQQizWsodBRELoBrgm0TWxvNkawrHhf3xjsu70UNBuHJXgSb_OSPSucQYHcTm-sRm_O=s160-c-k-c0x00ffffff-no-rj" class="header-icon"></a>
-  <a href="https://youtube.com/channel/UCPzTL2tHlJvcL0qm7o5l2Kw?si=vJsEaRaAk22Aejbc"><img src="https://yt3.googleusercontent.com/ytc/AIdro_ndtGCqv8GkxVkOUgUUrgxMJ79NmTAJGhdSHUUM4AH2_DjjKes=s160-c-k-c0x00ffffff-no-rj" class="header-icon"></a>
+<span class="logo" id="mainLogo">🐞 MIRACULOUS CINEMA KOREAN 🐞</span>
+<div class="header-icons">
+<a href="https://youtube.com/channel/UCBqVwXZmvm44NyNqYlrheUQ?si=Rv13RYxcDmp2owg2" target="_blank"><img src="https://yt3.googleusercontent.com/cn1f2mQQizWsodBRELoBrgm0TWxvNkawrHhf3xjsu70UNBuHJXgSb_OSPSucQYHcTm-sRm_O=s160-c-k-c0x00ffffff-no-rj" class="header-icon"></a>
+<a href="https://youtube.com/channel/UCPzTL2tHlJvcL0qm7o5l2Kw?si=vJsEaRaAk22Aejbc" target="_blank"><img src="https://yt3.googleusercontent.com/ytc/AIdro_ndtGCqv8GkxVkOUgUUrgxMJ79NmTAJGhdSHUUM4AH2_DjjKes=s160-c-k-c0x00ffffff-no-rj" class="header-icon"></a>
 </div>
 </header>
 
-<input 
-  type="text" 
-  id="searchInput" 
-  placeholder="작품 검색..." 
-  onkeyup="searchContent()" 
-  style="padding:15px; width:100%; font-size:18px; margin:10px 0;">
-
-<div id="searchResults" class="content-list"></div>
+<div class="search-container">
+<input
+type="text"
+id="searchInput"
+placeholder="작품명을 검색해보세요..."
+onkeyup="searchContent()">
+</div>
 
 <!-- 🎬 플레이어 -->
 <div class="player" id="playerBox" style="display:none;">
-  <iframe id="player" allow="autoplay" allowfullscreen></iframe>
+<iframe id="player" allow="autoplay" allowfullscreen></iframe>
 </div>
 
 <!-- 📺 에피소드 목록 -->
 <div class="episodes" id="episodeList"></div>
-
-</div>
 
 <div class="container">
 
