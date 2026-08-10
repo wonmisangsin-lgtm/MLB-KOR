@@ -2,265 +2,514 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>MLB KOR</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-/* 🎨 전체적인 디자인 스타일 및 심플화 */
+/* 🎨 공통 기본 스타일 */
+* {
+  box-sizing: border-box;
+}
+
 body {
-margin: 0;
-background: #141414;
-color: #ffffff;
-font-family: 'Segoe UI', Arial, sans-serif;
--webkit-font-smoothing: antialiased;
+  margin: 0;
+  background: #141414;
+  color: #ffffff;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 header.top-header {
-background: #000000;
-color: #e50914;
-padding: 15px 30px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-border-bottom: 1px solid #222;
-position: sticky;
-top: 0;
-z-index: 1000;
+  background: #000000;
+  color: #e50914;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #222;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
-font-family: 'Oswald', sans-serif;
-font-weight: 700;
-font-size: 24px;
-letter-spacing: 1.5px;
-color: #ffffff;
-cursor: pointer;
-transition: opacity 0.2s;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
 .logo:hover {
-opacity: 0.8;
+  opacity: 0.8;
 }
 
 .header-icons {
-display: flex;
-gap: 12px;
-align-items: center;
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 .header-icon {
-width: 28px;
-height: 28px;
-border-radius: 50%;
-cursor: pointer;
-transition: transform 0.2s;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
 .header-icon:hover {
-transform: scale(1.15);
+  transform: scale(1.15);
 }
 
 .search-container {
-padding: 20px 30px 10px 30px;
-max-width: 1200px;
-margin: 0 auto;
+  padding: 20px 30px 10px 30px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 #searchInput {
-width: 100%;
-padding: 14px 20px;
-font-size: 16px;
-background: #222;
-border: 1px solid #333;
-border-radius: 8px;
-color: white;
-outline: none;
-transition: border-color 0.2s;
-box-sizing: border-box;
+  width: 100%;
+  padding: 12px 18px;
+  font-size: 15px;
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: white;
+  outline: none;
+  transition: border-color 0.2s;
 }
 
 #searchInput:focus {
-border-color: #e50914;
+  border-color: #e50914;
 }
 
 .container {
-max-width: 1200px;
-margin: 0 auto;
-padding: 20px 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 30px 30px 30px;
 }
 
 .section-title {
-font-size: 18px;
-font-weight: bold;
-margin: 30px 0 15px 0;
-border-left: 4px solid #e50914;
-padding-left: 10px;
-color: #fff;
+  font-size: 17px;
+  font-weight: bold;
+  margin: 25px 0 12px 0;
+  border-left: 4px solid #e50914;
+  padding-left: 10px;
+  color: #fff;
 }
 
-.content-list {
-display: flex;
-gap: 15px;
-overflow-x: auto;
-padding-bottom: 15px;
-scrollbar-width: none;
-
-/* 🖱️ 컴퓨터 마우스 드래그를 위한 추가 설정 */
-  user-select: none; 
-  cursor: grab;
-}
-
-.content-list:active {
-  cursor: grabbing;
-}
-
-.content-list::-webkit-scrollbar {
-display: none;
-}
-
-.content-item {
-flex: 0 0 210px; /* 가로 비율 카드로 크기 조정 */
-cursor: pointer;
-transition: transform 0.25s ease;
-}
-
-.content-item img {
-width: 100%;
-aspect-ratio: 4 / 3; /* 요청하신 4:3 가로 비율 적용 */
-object-fit: cover;
-border-radius: 8px;
-box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.content-item:hover {
-transform: translateY(-5px);
-}
-
-.content-item:hover img {
-box-shadow: 0 8px 20px rgba(229, 9, 20, 0.3);
-}
-
-.content-item p {
-margin-top: 8px;
-font-size: 13px;
-color: #ccc;
-line-height: 1.4;
-display: -webkit-box;
--webkit-line-clamp: 2;
--webkit-box-orient: vertical;
-overflow: hidden;
-}
-
-/* 🎬 플레이어 영역 */
-.player {
-max-width: 1200px;
-margin: 20px auto;
-padding: 0 30px;
-text-align: center;
-}
-
-iframe {
-width: 100%;
-max-width: 900px;
-height: 500px;
-border: none;
-border-radius: 12px;
-box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-background: #000;
-}
-
-/* 📺 에피소드 목록 */
-.episodes {
-max-width: 1200px;
-margin: 20px auto;
-padding: 0 30px;
-}
-
-.episodes h3 {
-font-size: 20px;
-margin-bottom: 15px;
-color: #fff;
-}
-
-.episode {
-padding: 14px 18px;
-background: #1a1a1a;
-margin-bottom: 8px;
-cursor: pointer;
-border-radius: 6px;
-font-size: 14px;
-transition: background 0.2s, transform 0.2s;
-border: 1px solid #262626;
-}
-
-.episode:hover {
-background: #2a2a2a;
-transform: translateX(4px);
-border-color: #444;
-}
-
-/* 📱 모바일 최적화 */
-@media (max-width: 768px) {
-header.top-header {
-padding: 12px 15px;
-}
-
-.logo {
-font-size: 18px;
-}
-
-.search-container, .container, .player, .episodes {
-padding-left: 15px;
-padding-right: 15px;
-}
-
-.content-item {
-flex: 0 0 160px;
-}
-
-iframe {
-height: 240px;
-}
-}
-
-/* 📜 각 섹션별 가로 스크롤바(드래그 바) 스타일 */
+/* 💻 PC 및 공통 가로 드래그 레이아웃 (기존 유지) */
 .content-list {
   display: flex;
-  gap: 16px;
+  gap: 15px;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 5px 4px 20px 4px;
-  
-  /* 🖱️ 컴퓨터 드래그 설정 */
+  padding: 5px 4px 15px 4px;
   user-select: none;
   cursor: grab;
-
-  /* 파이어폭스 스크롤바 스타일 */
   scrollbar-width: thin;
   scrollbar-color: #e50914 #222;
+  -webkit-overflow-scrolling: touch;
 }
 
 .content-list:active {
   cursor: grabbing;
 }
 
-/* 크롬, 사파리, 엣지 스크롤바(드래그 바) 디자인 */
 .content-list::-webkit-scrollbar {
-  height: 8px; /* 드래그 바 두께 */
+  height: 6px;
 }
 
 .content-list::-webkit-scrollbar-thumb {
-  background: #e50914; /* 눈에 띄는 포인트 레드 색상 */
+  background: #e50914;
   border-radius: 4px;
 }
 
 .content-list::-webkit-scrollbar-track {
-  background: #222; /* 드래그 바 배경 트랙 */
+  background: #222;
   border-radius: 4px;
 }
 
-// 🖱️ 모든 작품 메뉴(content-list)에 컴퓨터 마우스 드래그 가로 스크롤 기능 부여
+.content-item {
+  flex: 0 0 210px;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+/* 📸 이미지 4:3 비율 고정 */
+.content-item img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.content-item:hover {
+  transform: translateY(-4px);
+}
+
+.content-item:hover img {
+  box-shadow: 0 6px 15px rgba(229, 9, 20, 0.3);
+}
+
+.content-item p {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #ccc;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.player {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 30px;
+  text-align: center;
+}
+
+iframe {
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+  background: #000;
+}
+
+.episodes {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 30px;
+}
+
+.episodes h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.episode {
+  padding: 12px 16px;
+  background: #1a1a1a;
+  margin-bottom: 6px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 13px;
+  transition: background 0.2s, transform 0.2s;
+  border: 1px solid #262626;
+}
+
+.episode:hover {
+  background: #2a2a2a;
+  transform: translateX(4px);
+  border-color: #444;
+}
+
+.bottom-nav {
+  display: none;
+}
+
+/* 📱 모바일 전용 스타일 (한 화면에 약 3개씩 노출되도록 수정) */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 60px;
+    background: #0f0f0f;
+  }
+
+  header.top-header {
+    padding: 12px 16px;
+    background: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(10px);
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .search-container {
+    padding: 10px 16px 5px 16px;
+  }
+
+  #searchInput {
+    padding: 9px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+
+  .container, .player, .episodes {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .section-title {
+    font-size: 15px;
+    margin: 20px 0 10px 0;
+  }
+
+  /* 📱 모바일: 1화면에 약 3개의 카드가 노출되도록 flex 비율 조정 */
+  .content-list {
+    gap: 8px;
+    padding-bottom: 10px;
+  }
+
+  .content-list::-webkit-scrollbar {
+    display: none; /* 모바일은 스크롤바 숨김 */
+  }
+
+  .content-item {
+    flex: 0 0 calc(31% - 5px); /* 한 화면에 딱 3개 정도가 차도록 너비 계산 */
+  }
+
+  .content-item img {
+    border-radius: 6px;
+  }
+
+  .content-item p {
+    font-size: 11px;
+    margin-top: 4px;
+    line-height: 1.2;
+  }
+
+  .player {
+    position: sticky;
+    top: 57px;
+    z-index: 999;
+    padding: 0;
+    margin: 10px 0;
+  }
+
+  iframe {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 0;
+  }
+
+  .episode {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 55px;
+    background: #121212;
+    border-top: 1px solid #262626;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #888;
+    font-size: 10px;
+    text-decoration: none;
+  }
+
+  .nav-item span {
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+}
+
+/* ❓ FAQ 스타일 */
+.faq-container {
+  max-width: 1200px;
+  margin: 30px auto 10px auto;
+  padding: 0 30px;
+}
+
+.faq-item {
+  background: #1a1a1a;
+  border: 1px solid #262626;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.faq-item:hover {
+  border-color: #444;
+}
+
+.faq-title {
+  padding: 15px 20px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  background: #1f1f1f;
+  color: #fff;
+  list-style: none; /* 기본 화살표 제거 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-title::-webkit-details-marker {
+  display: none; /* 브라우저 기본 화살표 제거 */
+}
+
+.faq-title::after {
+  content: '▼';
+  font-size: 12px;
+  color: #e50914;
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] .faq-title::after {
+  transform: rotate(180deg);
+}
+
+.faq-content {
+  padding: 15px 20px;
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.6;
+  border-top: 1px solid #262626;
+  background: #141414;
+}
+
+@media (max-width: 768px) {
+  .faq-container {
+    padding: 0 12px;
+    margin-top: 20px;
+  }
+  .faq-title {
+    padding: 12px 15px;
+    font-size: 13px;
+  }
+  .faq-content {
+    padding: 12px 15px;
+    font-size: 12px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<header class="top-header">
+  <span class="logo" id="mainLogo">🐞 MIRACULOUS CINEMA KOREAN 🐞</span>
+  <div class="header-icons">
+    <a href="https://youtube.com/channel/UCBqVwXZmvm44NyNqYlrheUQ?si=Rv13RYxcDmp2owg2" target="_blank"><img src="https://yt3.googleusercontent.com/cn1f2mQQizWsodBRELoBrgm0TWxvNkawrHhf3xjsu70UNBuHJXgSb_OSPSucQYHcTm-sRm_O=s160-c-k-c0x00ffffff-no-rj" class="header-icon"></a>
+    <a href="https://youtube.com/channel/UCPzTL2tHlJvcL0qm7o5l2Kw?si=vJsEaRaAk22Aejbc" target="_blank"><img src="https://yt3.googleusercontent.com/ytc/AIdro_ndtGCqv8GkxVkOUgUUrgxMJ79NmTAJGhdSHUUM4AH2_DjjKes=s160-c-k-c0x00ffffff-no-rj" class="header-icon"></a>
+  </div>
+</header>
+
+<!-- ❓ 자주 묻는 질문 (FAQ) -->
+<div class="faq-container">
+  <div class="section-title">자주 묻는 질문 (FAQ)</div>
+
+  <details class="faq-item">
+    <summary class="faq-title">Q. 허용 횟수 초과라 뜨면서 영상이 재생되지 않아요.</summary>
+    <div class="faq-content">
+      사이트 링크를 복사하여 이미 로그인 되어있는 구글 브라우저에 붙여넣기 후 재생해보세요. 그래도 안되면 1-2일 기다려주세요!
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-title">Q. 자막이 안 나와요.</summary>
+    <div class="faq-content">
+      플레이어 우측 하단의 설정(톱니바퀴) 아이콘을 눌러 자막 설정이 활성화되어 있는지 확인해보세요.
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-title">Q. 신규 에피소드는 언제 업로드되나요?</summary>
+    <div class="faq-content">
+      한국어 더빙은 방영후 작업이 끝나는 즉시 올라옵니다. (작업은 보통 30분-1시간 정도 소요)
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-title">Q. 작품 신청이나 그 외 기타 문의는 어디로 해야 하나요?</summary>
+    <div class="faq-content">
+      gs2971027@gmail.com 으로 문의해주시면 확인 후 답변드리겠습니다. 
+    </div>
+  </details>
+</div>
+
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="작품명을 검색해보세요..." onkeyup="searchContent()">
+</div>
+
+<!-- 🎬 플레이어 -->
+<div class="player" id="playerBox" style="display:none;">
+  <iframe id="player" allow="autoplay" allowfullscreen></iframe>
+</div>
+
+<!-- 📺 에피소드 목록 -->
+<div class="episodes" id="episodeList"></div>
+
+<div class="container">
+
+  <!-- 🎥 작품 19 -->
+  <div class="content-item" style="margin-bottom: 20px; width: 100%; max-width: 240px;" onclick="showEpisodes19()">
+    <img src="https://imgur.com/EN5U9IY.png">
+    <p>최신 에피소드 시청! <Sadnansi></p>
+  </div>
+
+  <div class="section-title">미라큘러스: 레이디버그와 블랙캣 시리즈</div>
+  <div class="content-list">
+    <div class="content-item" onclick="showEpisodes1()"><img src="https://imgur.com/kPM7j8a.png"><p>미라큘러스: 레이디버그와 블랙캣 시즌1</p></div>
+    <div class="content-item" onclick="showEpisodes2()"><img src="https://imgur.com/qYuEtgT.png"><p>미라큘러스: 레이디버그와 블랙캣 시즌2</p></div>
+    <div class="content-item" onclick="showEpisodes3()"><img src="https://imgur.com/4juwxop.png"><p>미라큘러스: 레이디버그와 블랙캣 시즌3</p></div>
+    <div class="content-item" onclick="showEpisodes4()"><img src="https://imgur.com/ApmrAVH.png"><p>미라큘러스: 레이디버그와 블랙캣 시즌4</p></div>
+    <div class="content-item" onclick="showEpisodes5()"><img src="https://imgur.com/podbKCh.png"><p>미라큘러스: 레이디버그와 블랙캣 시즌5</p></div>
+    <div class="content-item" onclick="showEpisodes18()"><img src="https://imgur.com/RuRCTVO.png"><p>미라큘러스: 레이디버그와 블랙캣 시즌5 (디즈니 플러스 버전)</p></div>
+    <div class="content-item" onclick="showEpisodes6()"><img src="https://imgur.com/0ePIFOo.png"><p>미라큘러스: 레이디버그와 블랙캣 시즌6</p></div>
+    <div class="content-item" onclick="showEpisodes17()"><img src="https://imgur.com/3mpK5sM.png"><p>미라큘러스: 레이디버그와 블랙캣 시즌6 (한글 자막)</p></div>
+  </div>
+
+  <div class="section-title">미라큘러스 월드 스페셜</div>
+  <div class="content-list">
+    <div class="content-item" onclick="showEpisodes7()"><img src="https://imgur.com/hxu388c.png"><p>미라큘러스 월드: 뉴욕, 하나된 영웅들!</p></div>
+    <div class="content-item" onclick="showEpisodes9()"><img src="https://imgur.com/gLrRtiW.png"><p>미라큘러스 월드: 상하이, 레이디 드래곤의 전설</p></div>
+    <div class="content-item" onclick="showEpisodes10()"><img src="https://imgur.com/CM9V42i.png"><p>미라큘러스 월드: 파리, 셰이디버그와 블랙클로</p></div>
+    <div class="content-item" onclick="showEpisodes11()"><img src="https://imgur.com/dBtBirn.png"><p>미라큘러스 월드: 런던, 시간의 끝에서</p></div>
+    <div class="content-item" onclick="showEpisodes12()"><img src="https://imgur.com/YNPNfLU.png"><p>미라큘러스 월드: 도쿄, 스텔라포스 (한글 자막)</p></div>
+  </div>
+
+  <div class="section-title">영화</div>
+  <div class="content-list">
+    <div class="content-item" onclick="showEpisodes8()"><img src="https://imgur.com/UydFAWT.png"><p>미라큘러스: 레이디버그와 블랙캣 더 무비</p></div>
+    <div class="content-item" onclick="showEpisodes15()"><img src="https://imgur.com/UJO5trN.png"><p>극장판 레이디버그</p></div>
+    <div class="content-item" onclick="showEpisodes16()"><img src="https://imgur.com/OaWgQlF.png"><p>극장판 레이디버그: 미라클스톤의 비밀</p></div>
+  </div>
+
+  <div class="section-title">특별편</div>
+  <div class="content-list">
+    <div class="content-item" onclick="showEpisodes13()"><img src="https://imgur.com/ZlHV9t3.png"><p>웨비소드</p></div>
+    <div class="content-item" onclick="showEpisodes14()"><img src="https://imgur.com/twurI0D.png"><p>코로나19 예방수칙</p></div>
+  </div>
+
+</div>
+
+<!-- 📱 모바일 하단 탭 바 -->
+<nav class="bottom-nav">
+  <a href="#" class="nav-item" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span>🏠</span>홈</a>
+  <a href="#" class="nav-item" onclick="document.getElementById('searchInput').focus()"><span>🔍</span>검색</a>
+  <a href="#episodeList" class="nav-item"><span>📺</span>목록</a>
+</nav>
+
+<script>
+// 마우스 드래그 스크롤 (PC 지원)
 const sliders = document.querySelectorAll('.content-list');
 sliders.forEach(slider => {
   let isDown = false;
@@ -272,196 +521,32 @@ sliders.forEach(slider => {
     startX = e.pageX - slider.offsetLeft;
     scrollLeft = slider.scrollLeft;
   });
-
-  slider.addEventListener('mouseleave', () => {
-    isDown = false;
-  });
-
-  slider.addEventListener('mouseup', () => {
-    isDown = false;
-  });
-
+  slider.addEventListener('mouseleave', () => isDown = false);
+  slider.addEventListener('mouseup', () => isDown = false);
   slider.addEventListener('mousemove', (e) => {
     if (!isDown) return;
     e.preventDefault();
     const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 1.5; // 드래그 민감도
+    const walk = (x - startX) * 1.5;
     slider.scrollLeft = scrollLeft - walk;
   });
 });
 
-</style>
-</head>
-<body>
+function playDrive(id) {
+  document.getElementById("player").src =
+    "https://drive.google.com/file/d/" + id + "/preview";
+}
 
-<header class="top-header">
-<span class="logo" id="mainLogo">🐞 MIRACULOUS CINEMA KOREAN 🐞</span>
-<div class="header-icons">
-<a href="https://youtube.com/channel/UCBqVwXZmvm44NyNqYlrheUQ?si=Rv13RYxcDmp2owg2" target="_blank"><img src="https://yt3.googleusercontent.com/cn1f2mQQizWsodBRELoBrgm0TWxvNkawrHhf3xjsu70UNBuHJXgSb_OSPSucQYHcTm-sRm_O=s160-c-k-c0x00ffffff-no-rj" class="header-icon"></a>
-<a href="https://youtube.com/channel/UCPzTL2tHlJvcL0qm7o5l2Kw?si=vJsEaRaAk22Aejbc" target="_blank"><img src="https://yt3.googleusercontent.com/ytc/AIdro_ndtGCqv8GkxVkOUgUUrgxMJ79NmTAJGhdSHUUM4AH2_DjjKes=s160-c-k-c0x00ffffff-no-rj" class="header-icon"></a>
-</div>
-</header>
+function playDrive(id) {
+  const player = document.getElementById("player");
+  const box = document.getElementById("playerBox");
+  player.src = "https://drive.google.com/file/d/" + id + "/preview";
+  box.style.display = "block";
+}
 
-<div class="search-container">
-<input
-type="text"
-id="searchInput"
-placeholder="작품명을 검색해보세요..."
-onkeyup="searchContent()">
-</div>
-
-<!-- 🎬 플레이어 -->
-<div class="player" id="playerBox" style="display:none;">
-<iframe id="player" allow="autoplay" allowfullscreen></iframe>
-</div>
-
-<!-- 📺 에피소드 목록 -->
-<div class="episodes" id="episodeList"></div>
-
-<div class="container">
-
-<!-- 🎥 작품 19 -->
-<div class="content-item" onclick="showEpisodes19()">
-  <img src="https://imgur.com/EN5U9IY.png">
-  <p>최신 에피소드 시청! <Sadnansi></p>
-</div>
-
-<div class="section-title">미라큘러스: 레이디버그와 블랙캣 시리즈</div>
-<div class="content-list">
-
-<!-- 🎥 작품 1 -->
-<div class="content-item" onclick="showEpisodes1()">
-  <img src="https://imgur.com/kPM7j8a.png">
-  <p>미라큘러스: 레이디버그와 블랙캣 시즌1</p>
-</div>
-
-<!-- 🎥 작품 2 -->
-<div class="content-item" onclick="showEpisodes2()">
-  <img src="https://imgur.com/qYuEtgT.png">
-  <p>미라큘러스: 레이디버그와 블랙캣 시즌2</p>
-</div>
-
-<!-- 🎥 작품 3 -->
-<div class="content-item" onclick="showEpisodes3()">
-  <img src="https://imgur.com/4juwxop.png">
-  <p>미라큘러스: 레이디버그와 블랙캣 시즌3</p>
-</div>
-
-<!-- 🎥 작품 4 -->
-<div class="content-item" onclick="showEpisodes4()">
-  <img src="https://imgur.com/ApmrAVH.png">
-  <p>미라큘러스: 레이디버그와 블랙캣 시즌4</p>
-</div>
-
-<!-- 🎥 작품 5 -->
-<div class="content-item" onclick="showEpisodes5()">
-  <img src="https://imgur.com/podbKCh.png">
-  <p>미라큘러스: 레이디버그와 블랙캣 시즌5</p>
-</div>
-
-<!-- 🎥 작품 18 -->
-<div class="content-item" onclick="showEpisodes18()">
-  <img src="https://imgur.com/RuRCTVO.png">
-  <p>미라큘러스: 레이디버그와 블랙캣 시즌5 (디즈니 플러스 버전)</p>
-</div>
-
-<!-- 🎥 작품 6 -->
-<div class="content-item" onclick="showEpisodes6()">
-  <img src="https://imgur.com/0ePIFOo.png">
-  <p>미라큘러스: 레이디버그와 블랙캣 시즌6</p>
-</div>
-
-<!-- 🎥 작품 17 -->
-<div class="content-item" onclick="showEpisodes17()">
-  <img src="https://imgur.com/3mpK5sM.png">
-  <p>미라큘러스: 레이디버그와 블랙캣 시즌6 (한글 자막)</p>
-</div>
-
-</div>
-
-<div class="section-title">미라큘러스 월드 스페셜</div>
-<div class="content-list">
-
-<!-- 🎥 작품 7 -->
-<div class="content-item" onclick="showEpisodes7()">
-  <img src="https://imgur.com/hxu388c.png">
-  <p>미라큘러스 월드: 뉴욕, 하나된 영웅들!</p>
-</div>
-
-<!-- 🎥 작품 9 -->
-<div class="content-item" onclick="showEpisodes9()">
-  <img src="https://imgur.com/gLrRtiW.png">
-  <p>미라큘러스 월드: 상하이, 레이디 드래곤의 전설</p>
-</div>
-
-<!-- 🎥 작품 10 -->
-<div class="content-item" onclick="showEpisodes10()">
-  <img src="https://imgur.com/CM9V42i.png">
-  <p>미라큘러스 월드: 파리, 셰이디버그와 블랙클로</p>
-</div>
-
-<!-- 🎥 작품 11 -->
-<div class="content-item" onclick="showEpisodes11()">
-  <img src="https://imgur.com/dBtBirn.png">
-  <p>미라큘러스 월드: 런던, 시간의 끝에서</p>
-</div>
-
-<!-- 🎥 작품 12 -->
-<div class="content-item" onclick="showEpisodes12()">
-  <img src="https://imgur.com/YNPNfLU.png">
-  <p>미라큘러스 월드: 도쿄, 스텔라포스 (한글 자막)</p>
-</div>
-</div>
-
-<div class="section-title">영화</div>
-<div class="content-list">
-
-<!-- 🎥 작품 8 -->
-<div class="content-item" onclick="showEpisodes8()">
-  <img src="https://imgur.com/UydFAWT.png">
-  <p>미라큘러스: 레이디버그와 블랙캣 더 무비</p>
-</div>
-
-<!-- 🎥 작품 15 -->
-<div class="content-item" onclick="showEpisodes15()">
-  <img src="https://imgur.com/UJO5trN.png">
-  <p>극장판 레이디버그</p>
-</div>
-
-<!-- 🎥 작품 16 -->
-<div class="content-item" onclick="showEpisodes16()">
-  <img src="https://imgur.com/OaWgQlF.png">
-  <p>극장판 레이디버그: 미라클스톤의 비밀</p>
-</div>
-
-</div>
-
-<div class="section-title">특별편</div>
-<div class="content-list">
-
-<!-- 🎥 작품 13 -->
-<div class="content-item" onclick="showEpisodes13()">
-  <img src="https://imgur.com/ZlHV9t3.png">
-  <p>웨비소드</p>
-</div>
-
-<!-- 🎥 작품 14 -->
-<div class="content-item" onclick="showEpisodes14()">
-  <img src="https://imgur.com/twurI0D.png">
-  <p>코로나19 예방수칙</p>
-</div>
-
-</div>
-
-<script>
-
-// 📺 작품 1 에피소드
 function showEpisodes1() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
+  document.getElementById("episodeList").innerHTML = `
     <h3>미라큘러스: 레이디버그와 블랙캣 시즌1</h3>
-
     <div class="episode" onclick="playDrive('1us3hIT2J5zVp1BuljtaVjVWpfRWcSnkY')">1화, 분노의 폭풍</div>
     <div class="episode" onclick="playDrive('1bwyTRmHNpDM7G2o94q-DQPUBF4em702z')">2화, 널 그리고, 또 지우고</div>
     <div class="episode" onclick="playDrive('1H_P-KU-66wF5u_WWy636Sr2S9jCCLznz')">3화, 내 친구 알리야</div>
@@ -491,114 +576,9 @@ function showEpisodes1() {
   `;
 }
 
-// 📺 작품 7 에피소드
-function showEpisodes7() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
-    <h3>뉴욕, 하나된 영웅들!</h3>
-
-    <div class="episode" onclick="playDrive('17M4cjqjQ2M3U9yiqq_MUuQjUe2wu_I_S')">뉴욕, 하나된 영웅들!</div>
-  `;
-}
-
-// 📺 작품 9 에피소드
-function showEpisodes9() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
-    <h3>상하이, 레이디 드래곤의 전설</h3>
-
-    <div class="episode" onclick="playDrive('1CPvTorPw1wwC3cp97UHGzdj18yoIxv8B')">상하이, 레이디 드래곤의 전설</div>
-  `;
-}
-
-// 📺 작품 10 에피소드
-function showEpisodes10() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
-    <h3>파리, 셰이디버그와 블랙클로</h3>
-
-    <div class="episode" onclick="playDrive('1jlIPZxJQ4mw4RI9ZzHMs7t_CyKWJOWPz')">파리, 셰이디버그와 블랙클로</div>
-    <div class="episode" onclick="playDrive('13HOnMz15zbjf8sPXA9W6h2gF0WJX1WlC')">파리, 셰이디버그와 블랙클로 (한글 자막)</div>
-  `;
-}
-
-// 📺 작품 11 에피소드
-function showEpisodes11() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
-    <h3>런던, 시간의 끝에서</h3>
-
-    <div class="episode" onclick="playDrive('1k-ILYIr3hZ3sIW0_L8BDxHHQkoZNoVqo')">런던, 시간의 끝에서</div>
-    <div class="episode" onclick="playDrive('1p7mD7WIEzs9SHPs7Bkr8a09MxHCqRlBS')">런던, 시간의 끝에서 (한글 자막)</div>
-  `;
-}
-
-// 📺 작품 12 에피소드
-function showEpisodes12() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
-    <h3>도쿄, 스텔라포스</h3>
-
-    <div class="episode" onclick="playDrive('1FEKf8bP__GXPnV0pubiLoBDRsYS8sVpG')">도쿄, 스텔라포스</div>
-  `;
-}
-
-// 📺 작품 8 에피소드
-function showEpisodes8() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
-    <h3>미라큘러스: 레이디버그와 블랙캣 더 무비</h3>
-
-    <div class="episode" onclick="playDrive('1xtKy_aPoJqSaoqaBwHqclx--9jEVNkLE')">미라큘러스: 레이디버그와 블랙캣 더 무비</div>
-    <div class="episode" onclick="playDrive('1_Dm9jx7FwCYbOv8JvTVzUTI_drjhqrZh')">미라큘러스: 레이디버그와 블랙캣 더 무비 삭제 장면 모음 (한글 자막)</div>
-    <div class="episode" onclick="playDrive('1_Dq-0R7FwtBuOPIMKG0Bj86LoMy7kMkF')">미라큘러스: 레이디버그와 블랙캣 더 무비 삭제 장면 (한글 자막)</div>
-  `;
-}
-
-// 📺 작품 6 에피소드
-function showEpisodes6() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
-    <h3>미라큘러스: 레이디버그와 블랙캣 시즌6</h3>
-
-    <div class="episode" onclick="playDrive('1TUw93kvSp3DykTsyLLAykXOhE7Ig7Cza')">1화, '좋아요'의 노예</div>
-    <div class="episode" onclick="playDrive('1s5uC_sGFfWvP9WTpDrEevCMJn3xfDuee')">2화, 일러스트레이터 그림 속 악몽</div>
-    <div class="episode" onclick="playDrive('1-t0Kw8188LR2ohDDqNoiXWeIN18nQHkk')">3화, 완벽의 함정</div>
-    <div class="episode" onclick="playDrive('1yaFT5ipB_gOW3FYcUH2rtGnLATcj49Qm')">4화, 슈퍼 아빠, 대디캅</div>
-    <div class="episode" onclick="playDrive('1ZgHoN8yAZTkPoDKfUeyYMKc4lc8ZiAqV')">5화, 또 하나의 가족</div>
-    <div class="episode" onclick="playDrive('12WGUY7R0IDkY-KTt8Ce8cvTLhD0n8Ws_')">6화, 잠자는 물속의 공주, 세이렌</div>
-    <div class="episode" onclick="playDrive('1Bt8KKPk6Z-kPvQPoEkeYR4UdTrz1Vz-N')">7화, 아빠를 닮은 나</div>
-    <div class="episode" onclick="playDrive('1f4OexKmZ-7T7EW0HLN0_oud9xXYz_ceP')">8화, 미스터 아그레스트</div>
-    <div class="episode" onclick="playDrive('1afAW5Cfw-EIjy7CzfFL68W5lztWoYvWN')">9화, 어둠의 성, 다크 캐슬</div>
-    <div class="episode" onclick="playDrive('1KWThPHbkZz9cHnyK-R954Q-egz22RZ-P')">10화, 비밀 파괴자 레벨레이터</div>
-    <div class="episode" onclick="playDrive('1Sv4yko2J2lfMPSCSTWHb5LDcRVL02PE7')">11화, 마음을 조종하는자, 마인드 드라이버</div>
-    <div class="episode" onclick="playDrive('1neuyNpYDAACjR6IJlj2mzaZyAQyhTKkv')">12화, 야크시 고젠, 어머니의 이름으로</div>
-    <div class="episode" onclick="playDrive('19UARiesU-xM7BY8tQxkdZCBbcOZ_EUoB')">13화, 바른길로 인도하는 자, 룰러</div>
-    <div class="episode" onclick="playDrive('16ATdKJau5tBPdQtwYluPe1MEt14xJs_u')">14화, 기저귀 찬 악당, 그랜다이퍼</div>
-    <div class="episode" onclick="playDrive('1zof2_1zIwI9XET28YvYsA9V9M77gVW87')">15화, 뱀피가미 백작의 호러 쇼</div>
-    <div class="episode" onclick="playDrive('1UA-CpwEChdbgaNN0wIjbrNDFjPSOUNmO')">16화, 조작된 진실</div>
-    <div class="episode" onclick="playDrive('1NFTQaf17VSzAjPEzCTC4Jb8cTEko6Qcw')">17화, 아름다운 꿈의 요정</div>
-    <div class="episode" onclick="playDrive('1Rlu45IK1qFVGnk-SeHnfarLCIPWZ6sUC')">18화, 레이디 카오스</div>
-    <div class="episode" onclick="playDrive('1iNBLJgzIAj-gyF8GSO8txRMVMhYF6nhJ')">19화, 사랑의 함정</div>
-    <div class="episode" onclick="playDrive('1nEeb8Thp5kCwEHtd_bXGByz-2b3ktC1h')">20화, 슬픈 거미 괴물, 새드난시</div>
-    <div class="episode" onclick="playDrive('1hgUAJtJNXym5WXvyU1K1eHghYqf5JaVp')">21화, 더티파이어스</div>
-  `;
-}
-
-// 📺 작품 2 에피소드
 function showEpisodes2() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
+  document.getElementById("episodeList").innerHTML = `
     <h3>미라큘러스: 레이디버그와 블랙캣 시즌2</h3>
-
     <div class="episode" onclick="playDrive('1apMT7QC4wgcBw0mZm-1dSc760OoBctOv')">1화, 의문의 수집가</div>
     <div class="episode" onclick="playDrive('16sfvAdDxp9V0EFcXrAFW43Y_03cwLw9g')">2화, 시청률의 여왕</div>
     <div class="episode" onclick="playDrive('1AJTosPu1YXdah3fYLC8GByADN_t0z6mY')">3화, 사랑의 아이스크림</div>
@@ -628,13 +608,9 @@ function showEpisodes2() {
   `;
 }
 
-// 📺 작품 3 에피소드
 function showEpisodes3() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
+  document.getElementById("episodeList").innerHTML = `
     <h3>미라큘러스: 레이디버그와 블랙캣 시즌3</h3>
-
     <div class="episode" onclick="playDrive('1fVoxBGAw4dYqgxjcGNfZpXwUjnhPDJjV')">1화, 카멜레온</div>
     <div class="episode" onclick="playDrive('1hotCcMkJu3B72JK2TQ3O3UgpxLgbsG4v')">2화, 애니메이션 감독의 분노</div>
     <div class="episode" onclick="playDrive('1l149psBdshVt8b0s3u5p9mI03Rewz55C')">3화, 전통을 지켜라!</div>
@@ -664,13 +640,9 @@ function showEpisodes3() {
   `;
 }
 
-// 📺 작품 4 에피소드
 function showEpisodes4() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
+  document.getElementById("episodeList").innerHTML = `
     <h3>미라큘러스: 레이디버그와 블랙캣 시즌4</h3>
-
     <div class="episode" onclick="playDrive('1WL_7JIrIQxoQN1-MiFazxexAnJrYR_dI')">1화, 진실과 거짓: 트루스</div>
     <div class="episode" onclick="playDrive('1M0BVLgs_XejQXSiFc47VW9mB1E7gfxks')">2화, 진실과 거짓: 라이즈</div>
     <div class="episode" onclick="playDrive('18uqHDl7aRDtz7Dwah71rMQx-_jgi1UR6')">3화, 비밀 결사단</div>
@@ -700,13 +672,9 @@ function showEpisodes4() {
   `;
 }
 
-// 📺 작품 5 에피소드
 function showEpisodes5() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
+  document.getElementById("episodeList").innerHTML = `
     <h3>미라큘러스: 레이디버그와 블랙캣 시즌5</h3>
-
     <div class="episode" onclick="playDrive('1WgJybnS3wUaTpyW1k8XRROzpRs_opE8B')">1화, 순간의 선택</div>
     <div class="episode" onclick="playDrive('1VwSAoQ7-ecH7nEOAbaryQxYUKN8w1Xak')">2화, 다수의 적</div>
     <div class="episode" onclick="playDrive('1PFfzjhjk9vQZZ5Z0Q8TCTncABe4bjW42')">3화, 숨겨 놓은 단서</div>
@@ -737,13 +705,82 @@ function showEpisodes5() {
   `;
 }
 
-// 📺 작품 13 에피소드
+function showEpisodes6() {
+  document.getElementById("episodeList").innerHTML = `
+    <h3>미라큘러스: 레이디버그와 블랙캣 시즌6</h3>
+    <div class="episode" onclick="playDrive('1TUw93kvSp3DykTsyLLAykXOhE7Ig7Cza')">1화, '좋아요'의 노예</div>
+    <div class="episode" onclick="playDrive('1s5uC_sGFfWvP9WTpDrEevCMJn3xfDuee')">2화, 일러스트레이터 그림 속 악몽</div>
+    <div class="episode" onclick="playDrive('1-t0Kw8188LR2ohDDqNoiXWeIN18nQHkk')">3화, 완벽의 함정</div>
+    <div class="episode" onclick="playDrive('1yaFT5ipB_gOW3FYcUH2rtGnLATcj49Qm')">4화, 슈퍼 아빠, 대디캅</div>
+    <div class="episode" onclick="playDrive('1ZgHoN8yAZTkPoDKfUeyYMKc4lc8ZiAqV')">5화, 또 하나의 가족</div>
+    <div class="episode" onclick="playDrive('12WGUY7R0IDkY-KTt8Ce8cvTLhD0n8Ws_')">6화, 잠자는 물속의 공주, 세이렌</div>
+    <div class="episode" onclick="playDrive('1Bt8KKPk6Z-kPvQPoEkeYR4UdTrz1Vz-N')">7화, 아빠를 닮은 나</div>
+    <div class="episode" onclick="playDrive('1f4OexKmZ-7T7EW0HLN0_oud9xXYz_ceP')">8화, 미스터 아그레스트</div>
+    <div class="episode" onclick="playDrive('1afAW5Cfw-EIjy7CzfFL68W5lztWoYvWN')">9화, 어둠의 성, 다크 캐슬</div>
+    <div class="episode" onclick="playDrive('1KWThPHbkZz9cHnyK-R954Q-egz22RZ-P')">10화, 비밀 파괴자 레벨레이터</div>
+    <div class="episode" onclick="playDrive('1Sv4yko2J2lfMPSCSTWHb5LDcRVL02PE7')">11화, 마음을 조종하는자, 마인드 드라이버</div>
+    <div class="episode" onclick="playDrive('1neuyNpYDAACjR6IJlj2mzaZyAQyhTKkv')">12화, 야크시 고젠, 어머니의 이름으로</div>
+    <div class="episode" onclick="playDrive('19UARiesU-xM7BY8tQxkdZCBbcOZ_EUoB')">13화, 바른길로 인도하는 자, 룰러</div>
+    <div class="episode" onclick="playDrive('16ATdKJau5tBPdQtwYluPe1MEt14xJs_u')">14화, 기저귀 찬 악당, 그랜다이퍼</div>
+    <div class="episode" onclick="playDrive('1zof2_1zIwI9XET28YvYsA9V9M77gVW87')">15화, 뱀피가미 백작의 호러 쇼</div>
+    <div class="episode" onclick="playDrive('1UA-CpwEChdbgaNN0wIjbrNDFjPSOUNmO')">16화, 조작된 진실</div>
+    <div class="episode" onclick="playDrive('1NFTQaf17VSzAjPEzCTC4Jb8cTEko6Qcw')">17화, 아름다운 꿈의 요정</div>
+    <div class="episode" onclick="playDrive('1Rlu45IK1qFVGnk-SeHnfarLCIPWZ6sUC')">18화, 레이디 카오스</div>
+    <div class="episode" onclick="playDrive('1iNBLJgzIAj-gyF8GSO8txRMVMhYF6nhJ')">19화, 사랑의 함정</div>
+    <div class="episode" onclick="playDrive('1nEeb8Thp5kCwEHtd_bXGByz-2b3ktC1h')">20화, 슬픈 거미 괴물, 새드난시</div>
+    <div class="episode" onclick="playDrive('1hgUAJtJNXym5WXvyU1K1eHghYqf5JaVp')">21화, 더티파이어스</div>
+  `;
+}
+
+function showEpisodes7() {
+  document.getElementById("episodeList").innerHTML = `
+    <h3>뉴욕, 하나된 영웅들!</h3>
+    <div class="episode" onclick="playDrive('17M4cjqjQ2M3U9yiqq_MUuQjUe2wu_I_S')">뉴욕, 하나된 영웅들!</div>
+  `;
+}
+
+function showEpisodes8() {
+  document.getElementById("episodeList").innerHTML = `
+    <h3>미라큘러스: 레이디버그와 블랙캣 더 무비</h3>
+    <div class="episode" onclick="playDrive('1xtKy_aPoJqSaoqaBwHqclx--9jEVNkLE')">미라큘러스: 레이디버그와 블랙캣 더 무비</div>
+    <div class="episode" onclick="playDrive('1_Dm9jx7FwCYbOv8JvTVzUTI_drjhqrZh')">미라큘러스: 레이디버그와 블랙캣 더 무비 삭제 장면 모음 (한글 자막)</div>
+    <div class="episode" onclick="playDrive('1_Dq-0R7FwtBuOPIMKG0Bj86LoMy7kMkF')">미라큘러스: 레이디버그와 블랙캣 더 무비 삭제 장면 (한글 자막)</div>
+  `;
+}
+
+function showEpisodes9() {
+  document.getElementById("episodeList").innerHTML = `
+    <h3>상하이, 레이디 드래곤의 전설</h3>
+    <div class="episode" onclick="playDrive('1CPvTorPw1wwC3cp97UHGzdj18yoIxv8B')">상하이, 레이디 드래곤의 전설</div>
+  `;
+}
+
+function showEpisodes10() {
+  document.getElementById("episodeList").innerHTML = `
+    <h3>파리, 셰이디버그와 블랙클로</h3>
+    <div class="episode" onclick="playDrive('1jlIPZxJQ4mw4RI9ZzHMs7t_CyKWJOWPz')">파리, 셰이디버그와 블랙클로</div>
+    <div class="episode" onclick="playDrive('13HOnMz15zbjf8sPXA9W6h2gF0WJX1WlC')">파리, 셰이디버그와 블랙클로 (한글 자막)</div>
+  `;
+}
+
+function showEpisodes11() {
+  document.getElementById("episodeList").innerHTML = `
+    <h3>런던, 시간의 끝에서</h3>
+    <div class="episode" onclick="playDrive('1k-ILYIr3hZ3sIW0_L8BDxHHQkoZNoVqo')">런던, 시간의 끝에서</div>
+    <div class="episode" onclick="playDrive('1p7mD7WIEzs9SHPs7Bkr8a09MxHCqRlBS')">런던, 시간의 끝에서 (한글 자막)</div>
+  `;
+}
+
+function showEpisodes12() {
+  document.getElementById("episodeList").innerHTML = `
+    <h3>도쿄, 스텔라포스</h3>
+    <div class="episode" onclick="playDrive('1FEKf8bP__GXPnV0pubiLoBDRsYS8sVpG')">도쿄, 스텔라포스</div>
+  `;
+}
+
 function showEpisodes13() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
+  document.getElementById("episodeList").innerHTML = `
     <h3>마리네뜨의 일기</h3>
-
     <div class="episode" onclick="playDrive('1XPj2ryf4E_LM8VDQrOLpROJT-G_SqcFV')">나의 생일파티</div>
     <div class="episode" onclick="playDrive('1XNX-5GMr-RNjCCm8OKopq7MPNC_7JWbO')">나의 절친 알리야</div>
     <div class="episode" onclick="playDrive('1XX9CyWOpB6OfdjiUCK4VEzvgGe8Kk-jj')">내 사랑 아드리앙</div>
@@ -757,46 +794,30 @@ function showEpisodes13() {
   `;
 }
 
-// 📺 작품 14 에피소드
 function showEpisodes14() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
+  document.getElementById("episodeList").innerHTML = `
     <h3>코로나19 예방 수칙</h3>
-
     <div class="episode" onclick="playDrive('1Y99MEGjVtiKGsHivekzd-32R2FxCknIM')">코로나19 예방 수칙</div>
   `;
 }
 
-// 📺 작품 15 에피소드
 function showEpisodes15() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
+  document.getElementById("episodeList").innerHTML = `
     <h3>극장판 레이디버그</h3>
-
     <div class="episode" onclick="playDrive('1phOt__PB6zHBLl0-tM56pUXoll8FbvTY')">극장판 레이디버그</div>
   `;
 }
 
-// 📺 작품 16 에피소드
 function showEpisodes16() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
+  document.getElementById("episodeList").innerHTML = `
     <h3>극장판 레이디버그: 미라클스톤의 비밀</h3>
-
     <div class="episode" onclick="playDrive('1mKhAi7_BqZFJa4yyMvyl58bEn6RdePKc')">극장판 레이디버그: 미라클스톤의 비밀</div>
   `;
 }
 
-// 📺 작품 17 에피소드
 function showEpisodes17() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
+  document.getElementById("episodeList").innerHTML = `
     <h3>미라큘러스: 레이디버그와 블랙캣 시즌6 (한글 자막) - 제공: 체리유튜브(님)</h3>
-
     <div class="episode" onclick="playDrive('1qLstf57cjTPPS9EwefGV_E4RB3YyYJED')">1화, Climatiqueen</div>
     <div class="episode" onclick="playDrive('1QK6K6OSEzP90wYDuZSwNhFpeBtVO2qDP')">2화, The Illustrhater</div>
     <div class="episode" onclick="playDrive('1fwUde4aViIzULEfq6eNiPEoTxcV-P9ls')">3화, Sublimation</div>
@@ -826,13 +847,9 @@ function showEpisodes17() {
   `;
 }
 
-// 📺 작품 18 에피소드
 function showEpisodes18() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
+  document.getElementById("episodeList").innerHTML = `
     <h3>미라큘러스: 레이디버그와 블랙캣 시즌5 (디즈니 플러스 버전)</h3>
-
     <div class="episode" onclick="playDrive('1Rto4-7pQzrkSfJLBOI3aouuFdWYEYshm')">1화, 과거를 건 싸움</div>
     <div class="episode" onclick="playDrive('17QcoclveiCMTnz7jVz1NZFMfWYzeCEdm')">2화, 숨겨진 음모</div>
     <div class="episode" onclick="playDrive('1hZRqLKdYhcTXPSHjGOTcOwJiQqOMDGCO')">3화, 함정에 걸려든 모나크</div>
@@ -849,106 +866,50 @@ function showEpisodes18() {
   `;
 }
 
-// 📺 작품 19 에피소드
 function showEpisodes19() {
-  const list = document.getElementById("episodeList");
-
-  list.innerHTML = `
-    <h3>시즌6의 새로운 에피소드! (2026/08/08 업데이트)</h3>
+  document.getElementById("episodeList").innerHTML = `
+    <h3>시즌6의 새로운 에피소드!</h3>
     <div class="episode" onclick="playDrive('1etB6UWvFPJvY8Epvc0tE4wE7JTOMW2F9')">시즌6의 마지막 회차, 26화 "Nemesis"를 한글 자막으로 시청해보세요!</div>
   `;
 }
 
-// 🎥 구글 드라이브 재생
-function playDrive(id) {
-  document.getElementById("player").src =
-    "https://drive.google.com/file/d/" + id + "/preview";
-}
-function playDrive(id) {
-  const player = document.getElementById("player");
-  const box = document.getElementById("playerBox");
-
-  player.src = "https://drive.google.com/file/d/" + id + "/preview";
-
-  box.style.display = "block"; // 🔥 이거 추가
-}
-
-// 🎬 유튜브 재생
-function playYT(id) {
-  document.getElementById("player").src =
-    "https://www.youtube.com/embed/" + id + "?autoplay=1";
-}
-
-
-</script>
-
-<script>
+// 스크롤 이동 이벤트
 document.addEventListener("click", function(e) {
-
-  // 🎬 작품 클릭 → 맨 위로 이동
   if (e.target.closest(".content-item")) {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  // 📺 에피소드 클릭 → 플레이어 위치로 (조금 위쪽으로)
   if (e.target.closest(".episode")) {
     const playerBox = document.getElementById("playerBox");
-
     if (playerBox) {
-      const y = playerBox.getBoundingClientRect().top + window.pageYOffset - 100;
-
-      window.scrollTo({
-        top: y,
-        behavior: "smooth"
-      });
+      const y = playerBox.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   }
-
 });
-</script>
 
-<script>
-document.getElementById("logo").addEventListener("click", function() {
+// 로고 클릭시 리로드
+document.getElementById("mainLogo").addEventListener("click", function() {
   location.reload();
 });
-</script>
 
-</body>
-
-<script>
+// 검색 기능
 function searchContent() {
   const input = document.getElementById("searchInput").value.toLowerCase().trim();
   const items = document.querySelectorAll(".content-item");
   const titles = document.querySelectorAll(".section-title");
 
   if (input !== "") {
-    // 🔥 큰 제목 숨기기
     titles.forEach(t => t.style.display = "none");
-
-    // 🔥 작품 필터
     items.forEach(item => {
       const title = item.querySelector("p");
       if (!title) return;
-
       const text = title.innerText.toLowerCase();
-
-      if (text.includes(input)) {
-        item.style.display = "block";
-      } else {
-        item.style.display = "none";
-      }
+      item.style.display = text.includes(input) ? "block" : "none";
     });
-
   } else {
-    // 🔥 복구
     titles.forEach(t => t.style.display = "block");
-
-    items.forEach(item => {
-      item.style.display = "block";
-    });
+    items.forEach(item => item.style.display = "block");
   }
 }
 </script>
