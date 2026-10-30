@@ -7,6 +7,43 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
+/* 🎨 테마 변수 설정 (기본: 다크 모드) */
+:root {
+  --bg-color: #141414;
+  --header-bg: #000000;
+  --card-bg: #1a1a1a;
+  --card-border: #262626;
+  --card-hover-border: #444444;
+  --text-color: #ffffff;
+  --text-muted: #cccc33;
+  --text-sub: #ccc;
+  --input-bg: #222222;
+  --input-border: #333333;
+  --nav-bg: #121212;
+  --nav-border: #262626;
+  --primary-color: #e50914;
+  --faq-title-bg: #1f1f1f;
+  --shadow-color: rgba(0, 0, 0, 0.6);
+}
+
+/* ☀️ 라이트 모드 변수 정의 */
+[data-theme="light"] {
+  --bg-color: #f4f4f6;
+  --header-bg: #ffffff;
+  --card-bg: #ffffff;
+  --card-border: #e0e0e0;
+  --card-hover-border: #bbbbbb;
+  --text-color: #111111;
+  --text-sub: #555555;
+  --input-bg: #ffffff;
+  --input-border: #cccccc;
+  --nav-bg: #ffffff;
+  --nav-border: #dddddd;
+  --primary-color: #e50914;
+  --faq-title-bg: #f0f0f3;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
 /* 🎨 공통 기본 스타일 */
 * {
   box-sizing: border-box;
@@ -14,23 +51,25 @@
 
 body {
   margin: 0;
-  background: #141414;
-  color: #ffffff;
+  background: var(--bg-color);
+  color: var(--text-color);
   font-family: 'Segoe UI', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header.top-header {
-  background: #000000;
-  color: #e50914;
+  background: var(--header-bg);
+  color: var(--primary-color);
   padding: 15px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid var(--card-border);
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: background-color 0.3s ease;
 }
 
 .logo {
@@ -38,9 +77,9 @@ header.top-header {
   font-weight: 700;
   font-size: 24px;
   letter-spacing: 1.5px;
-  color: #ffffff;
+  color: var(--text-color);
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, color 0.3s ease;
 }
 
 .logo:hover {
@@ -65,6 +104,25 @@ header.top-header {
   transform: scale(1.15);
 }
 
+/* 🌗 다크/라이트 토글 버튼 스타일 */
+.theme-toggle-btn {
+  background: none;
+  border: 1px solid var(--card-border);
+  color: var(--text-color);
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.05);
+}
+
 .search-container {
   padding: 20px 30px 10px 30px;
   max-width: 1200px;
@@ -75,16 +133,16 @@ header.top-header {
   width: 100%;
   padding: 12px 18px;
   font-size: 15px;
-  background: #222;
-  border: 1px solid #333;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
   border-radius: 8px;
-  color: white;
+  color: var(--text-color);
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background-color 0.3s ease, color 0.3s ease;
 }
 
 #searchInput:focus {
-  border-color: #e50914;
+  border-color: var(--primary-color);
 }
 
 .container {
@@ -97,12 +155,13 @@ header.top-header {
   font-size: 17px;
   font-weight: bold;
   margin: 25px 0 12px 0;
-  border-left: 4px solid #e50914;
+  border-left: 4px solid var(--primary-color);
   padding-left: 10px;
-  color: #fff;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
-/* 💻 PC 및 공통 가로 드래그 레이아웃 (기존 유지) */
+/* 💻 PC 및 공통 가로 드래그 레이아웃 */
 .content-list {
   display: flex;
   gap: 15px;
@@ -112,7 +171,7 @@ header.top-header {
   user-select: none;
   cursor: grab;
   scrollbar-width: thin;
-  scrollbar-color: #e50914 #222;
+  scrollbar-color: var(--primary-color) var(--input-bg);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -125,12 +184,12 @@ header.top-header {
 }
 
 .content-list::-webkit-scrollbar-thumb {
-  background: #e50914;
+  background: var(--primary-color);
   border-radius: 4px;
 }
 
 .content-list::-webkit-scrollbar-track {
-  background: #222;
+  background: var(--input-bg);
   border-radius: 4px;
 }
 
@@ -146,7 +205,7 @@ header.top-header {
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 8px var(--shadow-color);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -161,7 +220,7 @@ header.top-header {
 .content-item p {
   margin-top: 8px;
   font-size: 13px;
-  color: #ccc;
+  color: var(--text-sub);
   line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -176,13 +235,23 @@ header.top-header {
   text-align: center;
 }
 
-iframe {
-  width: 100%;
-  max-width: 900px;
-  height: 500px;
-  border: none;
+/* 플레이어 영역 */
+.player-viewport {
+  width: min(100%, 900px);
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
   border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+  background: #000;
+  box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+#player {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
   background: #000;
 }
 
@@ -195,41 +264,39 @@ iframe {
 .episodes h3 {
   font-size: 18px;
   margin-bottom: 12px;
-  color: #fff;
+  color: var(--text-color);
 }
 
 .episode {
   padding: 12px 16px;
-  background: #1a1a1a;
+  background: var(--card-bg);
   margin-bottom: 6px;
   cursor: pointer;
   border-radius: 6px;
   font-size: 13px;
-  transition: background 0.2s, transform 0.2s;
-  border: 1px solid #262626;
+  color: var(--text-color);
+  transition: background 0.2s, transform 0.2s, border-color 0.2s;
+  border: 1px solid var(--card-border);
 }
 
 .episode:hover {
-  background: #2a2a2a;
+  background: var(--faq-title-bg);
   transform: translateX(4px);
-  border-color: #444;
+  border-color: var(--card-hover-border);
 }
 
 .bottom-nav {
   display: none;
 }
 
-/* 📱 모바일 전용 스타일 (한 화면에 약 3개씩 노출되도록 수정) */
+/* 📱 모바일 전용 스타일 */
 @media (max-width: 768px) {
   body {
     padding-bottom: 60px;
-    background: #0f0f0f;
   }
 
   header.top-header {
     padding: 12px 16px;
-    background: rgba(15, 15, 15, 0.95);
-    backdrop-filter: blur(10px);
   }
 
   .logo {
@@ -256,18 +323,17 @@ iframe {
     margin: 20px 0 10px 0;
   }
 
-  /* 📱 모바일: 1화면에 약 3개의 카드가 노출되도록 flex 비율 조정 */
   .content-list {
     gap: 8px;
     padding-bottom: 10px;
   }
 
   .content-list::-webkit-scrollbar {
-    display: none; /* 모바일은 스크롤바 숨김 */
+    display: none;
   }
 
   .content-item {
-    flex: 0 0 calc(47% - 5px); /* 한 화면에 딱 3개 정도가 차도록 너비 계산 */
+    flex: 0 0 calc(47% - 5px);
   }
 
   .content-item img {
@@ -286,10 +352,20 @@ iframe {
     margin: 10px 0;
   }
 
-  iframe {
-    height: auto;
-    aspect-ratio: 4 / 3;
+  .player-viewport {
+    width: 100%;
     border-radius: 0;
+  }
+
+  #player {
+    width: 800px;
+    height: 450px;
+    max-width: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+    transform: scale(var(--drive-scale, .45));
   }
 
   .episode {
@@ -304,8 +380,8 @@ iframe {
     left: 0;
     right: 0;
     height: 55px;
-    background: #121212;
-    border-top: 1px solid #262626;
+    background: var(--nav-bg);
+    border-top: 1px solid var(--nav-border);
     justify-content: space-around;
     align-items: center;
     z-index: 1000;
@@ -315,7 +391,7 @@ iframe {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #888;
+    color: var(--text-sub);
     font-size: 10px;
     text-decoration: none;
   }
@@ -334,16 +410,16 @@ iframe {
 }
 
 .faq-item {
-  background: #1a1a1a;
-  border: 1px solid #262626;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   margin-bottom: 10px;
   overflow: hidden;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background-color 0.3s ease;
 }
 
 .faq-item:hover {
-  border-color: #444;
+  border-color: var(--card-hover-border);
 }
 
 .faq-title {
@@ -351,22 +427,23 @@ iframe {
   font-weight: bold;
   font-size: 15px;
   cursor: pointer;
-  background: #1f1f1f;
-  color: #fff;
-  list-style: none; /* 기본 화살표 제거 */
+  background: var(--faq-title-bg);
+  color: var(--text-color);
+  list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .faq-title::-webkit-details-marker {
-  display: none; /* 브라우저 기본 화살표 제거 */
+  display: none;
 }
 
 .faq-title::after {
   content: '▼';
   font-size: 12px;
-  color: #e50914;
+  color: var(--primary-color);
   transition: transform 0.2s ease;
 }
 
@@ -377,10 +454,11 @@ iframe {
 .faq-content {
   padding: 15px 20px;
   font-size: 14px;
-  color: #ccc;
+  color: var(--text-sub);
   line-height: 1.6;
-  border-top: 1px solid #262626;
-  background: #141414;
+  border-top: 1px solid var(--card-border);
+  background: var(--card-bg);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @media (max-width: 768px) {
@@ -405,6 +483,7 @@ iframe {
 <header class="top-header">
   <span class="logo" id="mainLogo">🐞 MIRACULOUS CINEMA KOREAN 🐞</span>
   <div class="header-icons">
+    <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="테마 전환">🌙</button>
     <a href="https://youtube.com/channel/UCBqVwXZmvm44NyNqYlrheUQ?si=Rv13RYxcDmp2owg2" target="_blank"><img src="https://yt3.googleusercontent.com/cn1f2mQQizWsodBRELoBrgm0TWxvNkawrHhf3xjsu70UNBuHJXgSb_OSPSucQYHcTm-sRm_O=s160-c-k-c0x00ffffff-no-rj" class="header-icon"></a>
     <a href="https://youtube.com/channel/UCPzTL2tHlJvcL0qm7o5l2Kw?si=vJsEaRaAk22Aejbc" target="_blank"><img src="https://yt3.googleusercontent.com/ytc/AIdro_ndtGCqv8GkxVkOUgUUrgxMJ79NmTAJGhdSHUUM4AH2_DjjKes=s160-c-k-c0x00ffffff-no-rj" class="header-icon"></a>
   </div>
@@ -442,7 +521,7 @@ iframe {
 
 <!-- 🎬 플레이어 -->
 <div class="player" id="playerBox" style="display:none;">
-  <iframe id="player" allow="autoplay" allowfullscreen></iframe>
+  <div class="player-viewport" id="playerViewport"><iframe id="player" title="동영상 플레이어" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div>
 </div>
 
 <!-- 📺 에피소드 목록 -->
@@ -453,7 +532,7 @@ iframe {
   <!-- 🎥 작품 19 -->
   <div class="content-item" style="margin-bottom: 20px; width: 100%; max-width: 240px;" onclick="showEpisodes19()">
     <img src="https://imgur.com/EN5U9IY.png">
-    <p>최신 에피소드 시청! <Sadnansi></p>
+    <p>최신 에피소드 시청!</p>
   </div>
 
   <div class="section-title">미라큘러스: 레이디버그와 블랙캣 시리즈</div>
@@ -466,6 +545,7 @@ iframe {
     <div class="content-item" onclick="showEpisodes18()"><img src="https://imgur.com/RuRCTVO.png"><p>미라큘러스: 레이디버그와 블랙캣 시즌5 (디즈니 플러스 버전)</p></div>
     <div class="content-item" onclick="showEpisodes6()"><img src="https://imgur.com/0ePIFOo.png"><p>미라큘러스: 레이디버그와 블랙캣 시즌6</p></div>
     <div class="content-item" onclick="showEpisodes17()"><img src="https://imgur.com/3mpK5sM.png"><p>미라큘러스: 레이디버그와 블랙캣 시즌6 (한글 자막)</p></div>
+    <div class="content-item" onclick="showEpisodes20()"><img src="https://imgur.com/JsGgWTC.png"><p>미라큘러스: 레이디버그와 블랙캣 시즌7 (한글 자막)</p></div>
   </div>
 
   <div class="section-title">미라큘러스 월드 스페셜</div>
@@ -493,6 +573,31 @@ iframe {
 </div>
 
 <script>
+// 🌓 다크 / 라이트 모드 제어
+const themeToggleBtn = document.getElementById("themeToggleBtn");
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "light") {
+  document.documentElement.setAttribute("data-theme", "light");
+  themeToggleBtn.textContent = "☀️";
+} else {
+  document.documentElement.setAttribute("data-theme", "dark");
+  themeToggleBtn.textContent = "🌙";
+}
+
+themeToggleBtn.addEventListener("click", () => {
+  const currentTheme = document.documentElement.getAttribute("data-theme");
+  if (currentTheme === "light") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("theme", "dark");
+    themeToggleBtn.textContent = "🌙";
+  } else {
+    document.documentElement.setAttribute("data-theme", "light");
+    localStorage.setItem("theme", "light");
+    themeToggleBtn.textContent = "☀️";
+  }
+});
+
 // 마우스 드래그 스크롤 (PC 지원)
 const sliders = document.querySelectorAll('.content-list');
 sliders.forEach(slider => {
@@ -516,16 +621,25 @@ sliders.forEach(slider => {
   });
 });
 
-function playDrive(id) {
-  document.getElementById("player").src =
-    "https://drive.google.com/file/d/" + id + "/preview";
+function resizeDrivePlayer() {
+  const viewport = document.getElementById('playerViewport');
+  if (!viewport) return;
+  if (window.matchMedia('(max-width: 768px)').matches) {
+    viewport.style.setProperty('--drive-scale', String(viewport.clientWidth / 800));
+  } else {
+    viewport.style.removeProperty('--drive-scale');
+  }
 }
+window.addEventListener('resize', resizeDrivePlayer);
+window.addEventListener('orientationchange', resizeDrivePlayer);
+document.addEventListener('DOMContentLoaded', resizeDrivePlayer);
 
 function playDrive(id) {
   const player = document.getElementById("player");
   const box = document.getElementById("playerBox");
   player.src = "https://drive.google.com/file/d/" + id + "/preview";
   box.style.display = "block";
+  resizeDrivePlayer();
 }
 
 function showEpisodes1() {
@@ -815,7 +929,7 @@ function showEpisodes17() {
     <div class="episode" onclick="playDrive('1t-_MtW1L9oQTZXRde74qg7vwk5Aw5pza')">6화, Sleeping Syren</div>
     <div class="episode" onclick="playDrive('1i7oZie-X6x-7nehgex6_liymicm4QOKE')">7화, El Toro De Piedra</div>
     <div class="episode" onclick="playDrive('1BjdtDBxN3iX9eL_TmDd1Z1xr5igXcLPg')">8화, Vampigami</div>
-    <div class="episode" onclick="playDrive('1fCUW8waJFAP2nEGB2Xci4UeIe8K7AqAS')">9화, Mister Agreste</div>
+    <div class="episode" onclick="playDrive('19XqPh-6VXp9pdjLUcLxaxrDBYj7AJLVj')">9화, Mister Agreste</div>
     <div class="episode" onclick="playDrive('1PEZ5o_VzVfOEKyb94SRlhdEWyVArdInF')">10화, The Dark Castle</div>
     <div class="episode" onclick="playDrive('1fqsMrEDbvCiB5Kmy7sOJDV-_IaIIeo6k')">11화, Revelator</div>
     <div class="episode" onclick="playDrive('15-n0eB5HMsksIYNIwPWYtd-8FoFgvv3T')">12화, Wreckless Driver</div>
@@ -857,8 +971,15 @@ function showEpisodes18() {
 
 function showEpisodes19() {
   document.getElementById("episodeList").innerHTML = `
-    <h3>시즌6 한국어 더빙의 새로운 에피소드!</h3>
-    <div class="episode" onclick="playDrive('138inX12b8Pq9_x-KdfU0DWXbGkvj4iUo')">시즌6 26화 "네메시스"를 시청해보세요!</div>
+    <h3>시즌7 한글자막의 새로운 에피소드!</h3>
+    <div class="episode" onclick="playDrive('1w8Zn0X3u49bU3-PwuV2HYcCJFPQOCuFL')">시즌7 1화 "Replay Value"를 시청해보세요!</div>
+  `;
+}
+
+function showEpisodes20() {
+  document.getElementById("episodeList").innerHTML = `
+    <h3>미라큘러스: 레이디버그와 블랙캣 시즌7 (한글 자막)</h3>
+    <div class="episode" onclick="playDrive('1w8Zn0X3u49bU3-PwuV2HYcCJFPQOCuFL')">1화, Replay Value</div>
   `;
 }
 
